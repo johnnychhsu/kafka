@@ -1113,6 +1113,11 @@ class KafkaConfig private(doLog: Boolean, val props: java.util.Map[_, _], dynami
   def valuesFromThisConfigWithPrefixOverride(prefix: String): util.Map[String, AnyRef] =
     super.valuesWithPrefixOverride(prefix)
 
+  /** ********* Config logging ***********/
+  def logAllConfig() = {
+
+  }
+
   /** ********* Zookeeper Configuration ***********/
   val zkConnect: String = getString(ZkConfigs.ZK_CONNECT_CONFIG)
   val zkSessionTimeoutMs: Int = getInt(ZkConfigs.ZK_SESSION_TIMEOUT_MS_CONFIG)
