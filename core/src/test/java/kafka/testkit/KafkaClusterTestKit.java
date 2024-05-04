@@ -178,8 +178,11 @@ public class KafkaClusterTestKit implements AutoCloseable {
                         String.join(",", brokerNode.logDataDirectories()));
             } else {
                 // Set log.dirs equal to the metadata directory if there is just a controller.
-                props.put(LOG_DIRS_CONFIG,
-                    controllerNode.metadataDirectory());
+                if (controllerNode != null) {
+                    props.put(LOG_DIRS_CONFIG, controllerNode.metadataDirectory());
+                } else {
+                    props.put(LOG_DIRS_CONFIG, node.metadataDirectory());
+                }
             }
             props.put(SocketServerConfigs.LISTENER_SECURITY_PROTOCOL_MAP_CONFIG,
                     "EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT");
